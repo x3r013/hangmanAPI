@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangmanAPI", "HangmanAPI\HangmanAPI.csproj", "{6B940CF4-A4D4-4C39-874A-D5EC9E25A82B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F0623669-F3A3-4DE7-8B00-731CBA0101BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B940CF4-A4D4-4C39-874A-D5EC9E25A82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B940CF4-A4D4-4C39-874A-D5EC9E25A82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B940CF4-A4D4-4C39-874A-D5EC9E25A82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B940CF4-A4D4-4C39-874A-D5EC9E25A82B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0623669-F3A3-4DE7-8B00-731CBA0101BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0623669-F3A3-4DE7-8B00-731CBA0101BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0623669-F3A3-4DE7-8B00-731CBA0101BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0623669-F3A3-4DE7-8B00-731CBA0101BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1149E3F-6825-469B-BCE9-D674BA9AE094}
+	EndGlobalSection
+EndGlobal

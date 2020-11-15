@@ -1,0 +1,64 @@
+services:
+  hangmanapi:
+    build:
+      context: C:\Users\crlwo\source\repos\Hangman\HangmanAPI
+      dockerfile: HangmanAPI/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: HangmanAPI
+      target: base
+    container_name: HangmanAPI
+    depends_on:
+      hangmandb:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: hangmanapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/HangmanAPI.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    links:
+    - hangmandb:database
+    ports:
+    - target: 80
+    - published: 9093
+      target: 443
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\crlwo\source\repos\Hangman\HangmanAPI\HangmanAPI:/app:rw
+    - C:\Users\crlwo\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\crlwo\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\crlwo\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - C:\Users\crlwo\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\crlwo\source\repos\Hangman\HangmanAPI:/src:rw
+  hangmandb:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Password100
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - published: 9095
+      target: 1433
+  hangmanui:
+    build:
+      context: C:\Users\crlwo\source\repos\Hangman\HangmanAPI\hangmanui
+    depends_on:
+      hangmanapi:
+        condition: service_started
+    links:
+    - hangmanapi:api
+    ports:
+    - published: 9898
+      target: 8080
+version: '3.4'

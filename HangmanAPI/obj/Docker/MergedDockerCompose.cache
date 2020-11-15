@@ -1,0 +1,41 @@
+services:
+  hangmanapi:
+    build:
+      context: C:\Users\crlwo\source\repos\Hangman\HangmanAPI
+      dockerfile: HangmanAPI/Dockerfile
+    depends_on:
+      hangmandb:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    links:
+    - hangmandb:database
+    ports:
+    - target: 80
+    - published: 9093
+      target: 443
+    - target: 443
+    volumes:
+    - C:\Users\crlwo\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\crlwo\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  hangmandb:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Password100
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - published: 9095
+      target: 1433
+  hangmanui:
+    build:
+      context: C:\Users\crlwo\source\repos\Hangman\HangmanAPI\hangmanui
+    depends_on:
+      hangmanapi:
+        condition: service_started
+    links:
+    - hangmanapi:api
+    ports:
+    - published: 9898
+      target: 8080
+version: '3.4'

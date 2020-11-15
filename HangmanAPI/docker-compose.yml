@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  hangmandb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Password100"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "9095:1433"    
+  hangmanapi:    
+    build:
+      context: .
+      dockerfile: HangmanAPI/Dockerfile
+    ports:
+      - "9093:443"
+    depends_on:
+      - hangmandb
+    links:
+      - "hangmandb:database"     
+  hangmanui:    
+    build:
+      context: hangmanui
+    ports:
+      - "9898:8080"
+    depends_on:
+      - hangmanapi
+    links:
+      - "hangmanapi:api"

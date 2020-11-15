@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  ui:
+    build: hangmanui
+    ports:
+      - "9090:8080"
+  api:
+    build: HangmanAPI
+    ports:
+      - "9091:80"
+      - "9093:443"
