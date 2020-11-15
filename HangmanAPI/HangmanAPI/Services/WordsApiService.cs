@@ -33,7 +33,7 @@ namespace HangmanAPI.Services
                 RequestUri = new Uri($"https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersmin={min}&lettersMax={max}"),
                 Headers =
                     {
-                        { "x-rapidapi-key", "29e4d4e73bmshf47ab0dc9129ea3p17f1d5jsn67c09050a5e2" },
+                        { "x-rapidapi-key", "" },
                         { "x-rapidapi-host", "wordsapiv1.p.rapidapi.com" }
                     }
             };
